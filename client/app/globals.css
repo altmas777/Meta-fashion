@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-textPrimary font-sans antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-background border border-primary text-primary px-6 py-2 transition-all duration-200 hover:bg-primary hover:text-background disabled:opacity-50 disabled:cursor-not-allowed uppercase text-sm tracking-wider;
+  }
+  
+  .card {
+    @apply bg-surface border border-border transition-all duration-200 hover:border-t-primary;
+  }
+
+  .input-field {
+    @apply bg-background border border-border text-textPrimary px-4 py-2 w-full focus:outline-none focus:border-primary transition-colors;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E1E1E;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C8A97E;
+}
