@@ -40,14 +40,14 @@ export default function Navbar() {
             {mounted && isAuthenticated ? (
               <>
                 {user?.role === 'admin' && (
-                  <Link href="/admin" className="text-textPrimary hover:text-primary transition-colors">
+                  <Link href="/admin" className="hidden md:block text-textPrimary hover:text-primary transition-colors">
                     <Shield className="w-5 h-5" />
                   </Link>
                 )}
-                <Link href="/orders" className="text-textPrimary hover:text-primary transition-colors">
+                <Link href="/orders" className="hidden md:block text-textPrimary hover:text-primary transition-colors">
                   <Package className="w-5 h-5" />
                 </Link>
-                <Link href="/wishlist" className="text-textPrimary hover:text-primary transition-colors">
+                <Link href="/wishlist" className="hidden md:block text-textPrimary hover:text-primary transition-colors">
                   <Heart className="w-5 h-5" />
                 </Link>
                 <div className="relative cursor-pointer text-textPrimary hover:text-primary transition-colors" onClick={() => document.dispatchEvent(new CustomEvent('toggleCart'))}>
@@ -58,7 +58,7 @@ export default function Navbar() {
                     </span>
                   )}
                 </div>
-                <button onClick={logout} className="text-textPrimary hover:text-primary transition-colors">
+                <button onClick={logout} className="hidden md:block text-textPrimary hover:text-primary transition-colors">
                   <LogOut className="w-5 h-5" />
                 </button>
               </>
@@ -94,6 +94,25 @@ export default function Navbar() {
             <Link href="/shop" onClick={() => setIsMobileMenuOpen(false)} className="block text-textPrimary hover:text-primary transition-colors text-sm uppercase tracking-widest px-2">Shop</Link>
             <Link href="/shop?category=Fashion" onClick={() => setIsMobileMenuOpen(false)} className="block text-textPrimary hover:text-primary transition-colors text-sm uppercase tracking-widest px-2">Fashion</Link>
             <Link href="/shop?category=Electronics" onClick={() => setIsMobileMenuOpen(false)} className="block text-textPrimary hover:text-primary transition-colors text-sm uppercase tracking-widest px-2">Electronics</Link>
+            
+            {mounted && isAuthenticated && (
+              <div className="border-t border-border/50 pt-4 mt-4 space-y-4">
+                {user?.role === 'admin' && (
+                  <Link href="/admin" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 text-textPrimary hover:text-primary transition-colors text-sm uppercase tracking-widest px-2">
+                    <Shield className="w-4 h-4" /> Admin Panel
+                  </Link>
+                )}
+                <Link href="/orders" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 text-textPrimary hover:text-primary transition-colors text-sm uppercase tracking-widest px-2">
+                  <Package className="w-4 h-4" /> My Orders
+                </Link>
+                <Link href="/wishlist" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2 text-textPrimary hover:text-primary transition-colors text-sm uppercase tracking-widest px-2">
+                  <Heart className="w-4 h-4" /> Wishlist
+                </Link>
+                <button onClick={() => { logout(); setIsMobileMenuOpen(false); }} className="flex items-center gap-2 text-error hover:text-error/80 transition-colors text-sm uppercase tracking-widest px-2 w-full text-left">
+                  <LogOut className="w-4 h-4" /> Logout
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>

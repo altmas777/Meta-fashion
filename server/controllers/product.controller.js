@@ -20,6 +20,7 @@ const getProducts = async (req, res) => {
     }
 
     const products = await Product.find(query)
+      .sort({ createdAt: -1 })
       .limit(limit * 1)
       .skip((page - 1) * limit)
       .exec();

@@ -66,7 +66,7 @@ export default function CartSidebar() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="text-sm font-medium text-textPrimary truncate">{item.name}</h3>
-                    <p className="text-primary mt-1">₹{item.price.toFixed(2)}</p>
+                    <p className="text-primary mt-1">₹{(item.price * item.quantity).toFixed(2)}</p>
                     <div className="flex items-center gap-3 mt-3">
                       <div className="flex items-center border border-border">
                         <button 
