@@ -23,6 +23,12 @@ export default function CartPage() {
 
   useEffect(() => {
     setMounted(true);
+    const savedAddress = localStorage.getItem('metaFashionAddress');
+    if (savedAddress) {
+      try {
+        setFormData(JSON.parse(savedAddress));
+      } catch (e) {}
+    }
   }, []);
 
   const handleCheckoutClick = () => {
@@ -43,6 +49,9 @@ export default function CartPage() {
     e.preventDefault();
     setIsPlacingOrder(true);
     try {
+      // Save address for future use
+      localStorage.setItem('metaFashionAddress', JSON.stringify(formData));
+
       const res = await api.post('/api/orders', {
         items: items.map(i => ({ product: i.product, name: i.name, image: i.image, price: i.price, quantity: i.quantity })),
         totalAmount: getCartTotal(),
@@ -63,10 +72,10 @@ export default function CartPage() {
         const encodedMessage = encodeURIComponent(message);
         const waUrl = `https://wa.me/${adminPhone.replace('+', '')}?text=${encodedMessage}`;
         
-        window.open(waUrl, '_blank');
-        
         clearCart();
-        router.push('/orders');
+        
+        // Force redirect in same tab to bypass mobile popup blockers
+        window.location.href = waUrl;
       }
     } catch (error) {
       toast.error(error.response?.data?.message || 'Checkout failed');
