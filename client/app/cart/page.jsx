@@ -189,29 +189,29 @@ export default function CartPage() {
                   <form onSubmit={handlePlaceOrder} className="space-y-4">
                     <div>
                       <label className="block text-xs uppercase tracking-wider text-textMuted mb-2">Full Name</label>
-                      <input type="text" name="name" required value={formData.name} onChange={handleFormChange} className="input-field" />
+                      <input type="text" name="name" placeholder="John Doe" required value={formData.name} onChange={handleFormChange} className="input-field" />
                     </div>
                     <div>
                       <label className="block text-xs uppercase tracking-wider text-textMuted mb-2">WhatsApp Number</label>
-                      <input type="tel" name="phone" required value={formData.phone} onChange={handleFormChange} className="input-field" />
+                      <input type="tel" name="phone" placeholder="+91 9876543210" required value={formData.phone} onChange={handleFormChange} className="input-field" />
                     </div>
                     <div>
                       <label className="block text-xs uppercase tracking-wider text-textMuted mb-2">Full Address</label>
-                      <input type="text" name="address" required value={formData.address} onChange={handleFormChange} className="input-field" />
+                      <input type="text" name="address" placeholder="House No, Street, Landmark" required value={formData.address} onChange={handleFormChange} className="input-field" />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <label className="block text-xs uppercase tracking-wider text-textMuted mb-2">City</label>
-                        <input type="text" name="city" required value={formData.city} onChange={handleFormChange} className="input-field" />
+                        <input type="text" name="city" placeholder="Mumbai" required value={formData.city} onChange={handleFormChange} className="input-field" />
                       </div>
                       <div>
                         <label className="block text-xs uppercase tracking-wider text-textMuted mb-2">State</label>
-                        <input type="text" name="state" required value={formData.state} onChange={handleFormChange} className="input-field" />
+                        <input type="text" name="state" placeholder="Maharashtra" required value={formData.state} onChange={handleFormChange} className="input-field" />
                       </div>
                     </div>
                     <div>
                       <label className="block text-xs uppercase tracking-wider text-textMuted mb-2">Pincode</label>
-                      <input type="text" name="pincode" required value={formData.pincode} onChange={handleFormChange} className="input-field" />
+                      <input type="text" name="pincode" placeholder="400001" required value={formData.pincode} onChange={handleFormChange} className="input-field" />
                     </div>
 
                     <div className="pt-4 border-t border-border">
