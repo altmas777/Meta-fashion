@@ -19,7 +19,9 @@ app.use(cors({
     if (origin.startsWith('http://localhost:')) {
       return callback(null, true);
     }
-    if (origin === process.env.CLIENT_URL) {
+    // Check if origin matches CLIENT_URL (ignoring trailing slashes) or is a vercel app
+    const cleanClientUrl = process.env.CLIENT_URL?.replace(/\/$/, '');
+    if (origin === cleanClientUrl || origin.endsWith('.vercel.app')) {
       return callback(null, true);
     }
     return callback(new Error('Not allowed by CORS'));

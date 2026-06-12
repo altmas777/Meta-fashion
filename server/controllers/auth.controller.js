@@ -21,8 +21,14 @@ const register = async (req, res) => {
     user.refreshToken = refreshToken;
     await user.save();
 
-    res.cookie('accessToken', accessToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict', maxAge: 15 * 60 * 1000 });
-    res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict', maxAge: 7 * 24 * 60 * 60 * 1000 });
+    const cookieOptions = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+    };
+
+    res.cookie('accessToken', accessToken, { ...cookieOptions, maxAge: 15 * 60 * 1000 });
+    res.cookie('refreshToken', refreshToken, { ...cookieOptions, maxAge: 7 * 24 * 60 * 60 * 1000 });
 
     res.status(201).json({ success: true, data: { id: user._id, name: user.name, email: user.email, role: user.role } });
   } catch (error) {
@@ -44,8 +50,14 @@ const login = async (req, res) => {
     user.refreshToken = refreshToken;
     await user.save();
 
-    res.cookie('accessToken', accessToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict', maxAge: 15 * 60 * 1000 });
-    res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'strict', maxAge: 7 * 24 * 60 * 60 * 1000 });
+    const cookieOptions = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+    };
+
+    res.cookie('accessToken', accessToken, { ...cookieOptions, maxAge: 15 * 60 * 1000 });
+    res.cookie('refreshToken', refreshToken, { ...cookieOptions, maxAge: 7 * 24 * 60 * 60 * 1000 });
 
     res.status(200).json({ success: true, data: { id: user._id, name: user.name, email: user.email, role: user.role } });
   } catch (error) {
@@ -55,8 +67,15 @@ const login = async (req, res) => {
 
 const logout = async (req, res) => {
   try {
-    res.cookie('accessToken', '', { httpOnly: true, expires: new Date(0) });
-    res.cookie('refreshToken', '', { httpOnly: true, expires: new Date(0) });
+    const cookieOptions = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+      expires: new Date(0)
+    };
+    
+    res.cookie('accessToken', '', cookieOptions);
+    res.cookie('refreshToken', '', cookieOptions);
     res.status(200).json({ success: true, message: 'Logged out successfully' });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

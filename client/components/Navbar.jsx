@@ -24,7 +24,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 flex items-center">
-            <span className="font-serif text-2xl font-bold tracking-wider text-primary">META FASHION</span>
+            <span className="font-serif text-lg md:text-2xl font-bold tracking-wider text-primary">META FASHION</span>
           </Link>
 
           {/* Center Nav */}
