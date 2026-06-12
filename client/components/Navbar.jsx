@@ -9,7 +9,7 @@ export default function Navbar() {
   const { user, isAuthenticated, logout, checkAuth } = useAuthStore();
   const { items } = useCartStore();
   const [mounted, setMounted] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -77,8 +77,25 @@ export default function Navbar() {
                 </Link>
               </>
             )}
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden ml-4 text-textPrimary hover:text-primary transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
           </div>
         </div>
+
+        {/* Mobile Nav Links */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden py-4 border-t border-border mt-2 space-y-4">
+            <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="block text-textPrimary hover:text-primary transition-colors text-sm uppercase tracking-widest px-2">Home</Link>
+            <Link href="/shop" onClick={() => setIsMobileMenuOpen(false)} className="block text-textPrimary hover:text-primary transition-colors text-sm uppercase tracking-widest px-2">Shop</Link>
+            <Link href="/shop?category=Fashion" onClick={() => setIsMobileMenuOpen(false)} className="block text-textPrimary hover:text-primary transition-colors text-sm uppercase tracking-widest px-2">Fashion</Link>
+            <Link href="/shop?category=Electronics" onClick={() => setIsMobileMenuOpen(false)} className="block text-textPrimary hover:text-primary transition-colors text-sm uppercase tracking-widest px-2">Electronics</Link>
+          </div>
+        )}
       </div>
     </nav>
   );
