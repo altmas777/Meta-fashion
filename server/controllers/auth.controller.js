@@ -30,7 +30,7 @@ const register = async (req, res) => {
     res.cookie('accessToken', accessToken, { ...cookieOptions, maxAge: 15 * 60 * 1000 });
     res.cookie('refreshToken', refreshToken, { ...cookieOptions, maxAge: 7 * 24 * 60 * 60 * 1000 });
 
-    res.status(201).json({ success: true, data: { id: user._id, name: user.name, email: user.email, role: user.role } });
+    res.status(201).json({ success: true, data: { id: user._id, name: user.name, email: user.email, role: user.role, token: accessToken } });
   } catch (error) {
     console.error("Register Error:", error);
     res.status(500).json({ success: false, message: error.message });
@@ -59,7 +59,7 @@ const login = async (req, res) => {
     res.cookie('accessToken', accessToken, { ...cookieOptions, maxAge: 15 * 60 * 1000 });
     res.cookie('refreshToken', refreshToken, { ...cookieOptions, maxAge: 7 * 24 * 60 * 60 * 1000 });
 
-    res.status(200).json({ success: true, data: { id: user._id, name: user.name, email: user.email, role: user.role } });
+    res.status(200).json({ success: true, data: { id: user._id, name: user.name, email: user.email, role: user.role, token: accessToken } });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

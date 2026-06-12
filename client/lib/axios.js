@@ -5,6 +5,19 @@ const api = axios.create({
   withCredentials: true,
 });
 
+api.interceptors.request.use((config) => {
+  try {
+    const authStore = localStorage.getItem('auth-storage');
+    if (authStore) {
+      const { state } = JSON.parse(authStore);
+      if (state?.user?.token) {
+        config.headers.Authorization = `Bearer ${state.user.token}`;
+      }
+    }
+  } catch (error) {}
+  return config;
+});
+
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
